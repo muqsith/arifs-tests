@@ -10,7 +10,10 @@ const config = {
     entry: {
             index: path.resolve(__dirname, 'src', 'js', 'index.js'),
             tree: path.resolve(__dirname, 'src', 'js', 'tree.js'),
-            positions: path.resolve(__dirname, 'src', 'js', 'positions.js')
+            positions: path.resolve(__dirname, 'src', 'js', 'positions.js'),
+            arraytest: path.resolve(__dirname, 'src', 'js', 'array.js'),
+            objectTraversal: path.resolve(__dirname, 'src', 'js', 'object-traversal.js'),
+            primeNumber: path.resolve(__dirname, 'src', 'js', 'prime-number.js')
     },
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -53,6 +56,21 @@ const config = {
             template: path.resolve(__dirname, 'src', 'positions.html'),
             filename: 'positions.html',
             chunks: ['positions']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'array.html'),
+            filename: 'array.html',
+            chunks: ['arraytest']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'object-traversal.html'),
+            filename: 'object-traversal.html',
+            chunks: ['objectTraversal']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'prime-number.html'),
+            filename: 'prime-number.html',
+            chunks: ['primeNumber']
         }),
         new ExtractTextPlugin('main.css'),
         new CopyWebpackPlugin([

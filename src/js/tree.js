@@ -34,6 +34,7 @@ function Element(value) {
 function Tree() {
 
     this.root = null;
+    this.loops = 0;
 
     function addElementToTree(element, root) {
         if (!root) return;
@@ -63,20 +64,23 @@ function Tree() {
 
     function removeElementFromTree(data, root) {
         if (!root) return ;
-        if (root.right) {
-            if (root.right.value === data) {
-                root.right = null;
-            } else if (root.right.value < data) {
-                removeElementFromTree(data, root.right);
+        if (root.value < data) {
+            if (root.right) {
+                if (root.right.value === data) {
+                    root.right = null;
+                } else {
+                    removeElementFromTree(data, root.right);
+                }
             }
-        }
-        if (root.left) {
-            if (root.left.value === data) {
-                root.left = null;
-            } else if (root.left.value > data) {
-                removeElementFromTree(data, root.left);
+        } else if (root.value > data) {
+            if (root.left) {
+                if (root.left.value === data) {
+                    root.left = null;
+                } else {
+                    removeElementFromTree(data, root.left);
+                }
             }
-        }
+        }        
     }
 
     this.removeElement = function (data) {
@@ -87,12 +91,49 @@ function Tree() {
         }        
     }
 
+    this.depthFirst = function (data, root) {
+        this.loops += 1;
+        if (!root) return;
+        if (root.value === data) {
+            return root;
+        } else if (root.value < data) {
+            return this.depthFirst(data, root.right);
+        } else if (root.value > data) {
+            return this.depthFirst(data, root.left);
+        }
+    }
+
     this.depthFirstSearch = function (data) {
         console.log('doing depth first search');
+        this.loops = 0;
+        const e = this.depthFirst(data, this.root);
+        return ({element: e, loops: this.loops});
+    }
+
+    this.breadthFirst = function (data, root) {
+        this.loops += 1;
+        if (!root) return;
+        if (root.value === data) {
+            return root;
+        }
+        if (root.right && root.right.value === data) {
+            return root.right;
+        }
+        if (root.left && root.left.value === data) {
+            return root.left;
+        }
+        if (root.value < data) {
+            return this.breadthFirst(data, root.right);
+        } else if (root.value > data) {
+            return this.breadthFirst(data, root.left);
+        }
     }
 
     this.breadthFirstSearch = function (data) {
         console.log('doing breadth first search');
+        this.loops = 0;
+        const e = this.breadthFirst(data, this.root);
+        return ({element: e, loops: this.loops});
     }
 
     this.toString = function () {
@@ -114,6 +155,14 @@ function renderTree() {
 }
 renderTree();
 
+function renderSearchResult(result) {
+    setTimeout(() => {
+        const val = (result.element) ? result.element.value : null;
+        document.querySelector('#searchresult').innerHTML = JSON.stringify(val);
+        document.querySelector('#loops').innerHTML = JSON.stringify(result.loops);
+    }, 10);
+}
+
 
 let selectedMethod = 'breadthfirst';
 
@@ -130,13 +179,15 @@ window.removeNumber = function () {
 }
 
 window.searchNumber = function () {
-    let val = document.querySelector('#searchfield').value;
+    let val = parseInt(+document.querySelector('#searchfield').value);
     console.log('searching for ', val);
+    let result = null;
     if (selectedMethod === 'breadthfirst') {
-        tree.breadthFirstSearch(val)
+        result = tree.breadthFirstSearch(val)
     } else if (selectedMethod === 'depthfirst') {
-        tree.depthFirstSearch(val);
+        result = tree.depthFirstSearch(val);
     }
+    renderSearchResult(result);
 }
 
 window.setSearchMethod = function (event) {

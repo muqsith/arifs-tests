@@ -19,17 +19,29 @@
                 <div>
                     <div>
                         <h5>Add / Remove</h5>
-                        <label>Input: <input type="number" id="inputfield" value="0"/></label>
+                        <label>Input: <input type="number" id="inputfield" /></label>
                         <br/>
-                        <button>Add</button>
-                        <button>Remove</button>
+                        <button onclick="addNumber()">Add</button>
+                        <button onclick="removeNumber()">Remove</button>
                     </div>
                     <div>
                         <div>
                             <h5>Search:</h5>
                             <label>Input: <input type="number" id="searchfield" /></label>
                             <br/>
-                            <button>Search</button>
+                            <label>Search type</label>
+                            <br/>
+                            <label>Breadth first: 
+                                <input value="breadthfirst" 
+                                    checked="checked"
+                                    onclick="setSearchMethod(event)" type="radio" name="searchtype"/>
+                            </label>
+                            <label>Depth first
+                                <input value="depthfirst" 
+                                    onclick="setSearchMethod(event)" type="radio" name="searchtype" />
+                            </label>
+                            <br/>
+                            <button onclick="searchNumber()">Search</button>
                         </div>
                         <div>
                             <h6>Search result: </h6>

@@ -15,6 +15,7 @@ body {
     color: green;
     display: flex;
     flex-flow: column nowrap;
+    margin-right: 5%;
 }
 
 .output-sub-box {

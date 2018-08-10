@@ -72,7 +72,7 @@ const config = {
             filename: 'prime-number.html',
             chunks: ['primeNumber']
         }),
-        new ExtractTextPlugin('main.css'),
+        new ExtractTextPlugin({filename: '[name].[hash].css'}),
         new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, 'src', 'images'),

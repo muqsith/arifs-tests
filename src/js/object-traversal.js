@@ -25,7 +25,7 @@ const sample1 = {
     }
 };
 setTimeout(() => {
-    document.getElementById('input1').innerText = JSON.stringify(sample1, (key, val) => {
+    document.querySelector('#input1').innerHTML = JSON.stringify(sample1, (key, val) => {
         if (key && typeof val === 'undefined') {
             return 'undefined';
         } else {
@@ -67,7 +67,7 @@ const sample2 = {
 sampleData.data = sample2;
 
 setTimeout(() => {
-    document.getElementById('input2').innerText = JSON.stringify(sample2, (key, val) => {
+    document.querySelector('#input2').innerHTML = JSON.stringify(sample2, (key, val) => {
         if (key && val === sample2) {
             return '<<<circular ref>>>'
         } else if (typeof val === 'undefined') {
@@ -106,7 +106,7 @@ function printFalsyKeys(input) {
 }
 const result1 = printFalsyKeys(sample1);
 setTimeout(() => {
-    document.getElementById('result1').innerText = JSON.stringify(result1, null, 2);
+    document.querySelector('#result1').innerHTML = JSON.stringify(result1, null, 2);
 }, 100);
 
 
@@ -145,5 +145,5 @@ function printFalsyKeysWithCircularReference(input) {
 }
 const result2 = printFalsyKeysWithCircularReference(sample2);
 setTimeout(() => {
-    document.getElementById('result2').innerText = JSON.stringify(result2, null, 2);
+    document.querySelector('#result2').innerHTML = JSON.stringify(result2, null, 2);
 }, 100);

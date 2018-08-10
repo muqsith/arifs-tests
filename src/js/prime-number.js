@@ -6,7 +6,7 @@ window.showResult = function () {
         const loadingDiv = document.querySelector('.loading-icon-box');
         answerDiv.style.display = 'none';
         loadingDiv.style.display = 'flex';
-    }, 10);
+    }, 1);
 
 
     let input = +document.querySelector('#input').value
@@ -20,14 +20,14 @@ window.showResult = function () {
         const loadingDiv = document.querySelector('.loading-icon-box');
         answerDiv.style.display = 'flex';
         loadingDiv.style.display = 'none';
-    }, 100);    
+    }, 1);    
     setTimeout(() => {
         const answerDiv = document.querySelector('.answer-box');
         answerDiv.style.borderColor = (result) ? 'green' : 'red';
         const span = document.querySelector('#answer');
-        span.innerText = (result) ? 'Prime Number' : 'Not a prime number';
+        span.innerHTML = (result) ? 'Prime Number' : 'Not a prime number';
         span.style.color = (result) ? 'green' : 'red';
-    }, 10);
+    }, 1);
 }
 
 // to show result on page load

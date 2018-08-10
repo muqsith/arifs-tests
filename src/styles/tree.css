@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.input-box {
+    color: red;
+}
+
+.output-box {
+    color: green;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.output-sub-box {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}

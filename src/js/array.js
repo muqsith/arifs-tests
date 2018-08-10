@@ -8,7 +8,7 @@ const sample = [
 ];
 
 setTimeout(() => {
-    document.getElementById('input').innerText = JSON.stringify(sample, null, 2);
+    document.querySelector('#input').innerHTML = JSON.stringify(sample, null, 2);
 }, 100);
 /** Edit above sample to vary the inputs */
 
@@ -44,11 +44,11 @@ function findUnique(input) {
 
 const common = findCommon(sample);
 setTimeout(() => {
-    document.getElementById('common-result').innerText = JSON.stringify(common, null, 2);
+    document.querySelector('#common-result').innerHTML = JSON.stringify(common, null, 2);
 }, 100);
 
 const unique = findUnique(sample);
 setTimeout(() => {
-    document.getElementById('unique-result').innerText = JSON.stringify(unique, null, 2);
+    document.querySelector('#unique-result').innerHTML = JSON.stringify(unique, null, 2);
 }, 100);
 

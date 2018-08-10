@@ -19,11 +19,14 @@ setTimeout(() => {
  * @param {*} input
  */
 function findCommon(input) {
-    const filterSet = input[0];
-    return input.slice(1).reduce((acc, arrayElement) => {
-        return acc.concat(arrayElement.filter((element) => {
-            return (filterSet.indexOf(element) !== -1);
-        }));
+    return input.reduce((acc, arrayElement, i) => {
+        if (i === 0) {
+            return arrayElement;
+        } else {
+            return acc.filter((element) => {
+                return (arrayElement.indexOf(element) !== -1);
+            });
+        }        
     }, []);
 }
 

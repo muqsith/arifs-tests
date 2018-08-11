@@ -54,6 +54,7 @@ class Node {
       }
       return current.data;
     }
+    // the below find is depth first method
     find(data) {
       let current = this.root;
       while (current.data !== data) {
@@ -68,6 +69,32 @@ class Node {
       }
       return current;
     }
+
+    findBreadthFirst(data) {
+      let current = this.root;
+      while (current.data !== data) {
+        if (current.left) {
+          if (current.left.data === data) {
+            return current.left;
+          } else if (data < current.data) {
+            current = current.left;
+          }
+        }
+        if (current.right) {
+          if (current.right.data === data) {
+            return current.right;
+          } else if (data > current.data) {
+            current = current.right;
+          }
+        }
+        if (current === null) {
+          return null;
+        }
+      }
+      return current;
+    }
+
+
     isPresent(data) {
       let current = this.root;
       while (current) {

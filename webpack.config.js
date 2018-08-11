@@ -13,7 +13,8 @@ const config = {
             positions: path.resolve(__dirname, 'src', 'js', 'positions.js'),
             arraytest: path.resolve(__dirname, 'src', 'js', 'array.js'),
             objectTraversal: path.resolve(__dirname, 'src', 'js', 'object-traversal.js'),
-            primeNumber: path.resolve(__dirname, 'src', 'js', 'prime-number.js')
+            primeNumber: path.resolve(__dirname, 'src', 'js', 'prime-number.js'),
+            arifsTree: path.resolve(__dirname, 'src', 'js', 'arifs-tree.js')
     },
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -71,6 +72,11 @@ const config = {
             template: path.resolve(__dirname, 'src', 'prime-number.html'),
             filename: 'prime-number.html',
             chunks: ['primeNumber']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'arifs-tree.html'),
+            filename: 'arifs-tree.html',
+            chunks: ['arifsTree']
         }),
         new ExtractTextPlugin({filename: '[name].[hash].css'}),
         new CopyWebpackPlugin([

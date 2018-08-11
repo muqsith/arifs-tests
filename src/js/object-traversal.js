@@ -85,14 +85,16 @@ console.log('Sample2 has circular references: ', sample2.b.d.i.l.n.data === samp
 // Answer # 1
 
 function objectTraversal(obj, fn) {
-    for (let key in obj) {
-        let val = obj[key];
-        if (typeof val !== 'object' || val === null) {
-            if (!val) {
-                fn(key, val);
+    if (!Array.isArray(obj)) {
+        for (let key in obj) {
+            let val = obj[key];
+            if (typeof val !== 'object' || val === null) {
+                if (!val) {
+                    fn(key, val);
+                }
+            } else {
+                objectTraversal(val, fn);
             }
-        } else if (!Array.isArray(val)) {
-            objectTraversal(val, fn);
         }
     }
 }
@@ -120,17 +122,19 @@ const objectTraversalCR = function () { // objectTraversal with circular referen
         });
     };
     return function traversalFn (obj, fn) {
-        for (let key in obj) {
-            let val = obj[key];
-            if (typeof val !== 'object' || val === null) {
-                if (!val) {
-                    fn(key, val);
+        if (!Array.isArray(obj)) {
+            for (let key in obj) {
+                let val = obj[key];
+                if (typeof val !== 'object' || val === null) {
+                    if (!val) {
+                        fn(key, val);
+                    }
+                } else if (!hasSeenValues(val)) {
+                    if (typeof val === 'object') {
+                        seenValues.push(val);
+                    }
+                    traversalFn(val, fn);
                 }
-            } else if (!Array.isArray(val) && !hasSeenValues(val)) {
-                if (typeof val === 'object') {
-                    seenValues.push(val);
-                }
-                traversalFn(val, fn);
             }
         }
     }
